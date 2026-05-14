@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.40.2">
+    <meta name="project" content="spex v0.1.0">
+
+
+    <title>Spex.InstanceManager — spex v0.1.0</title>
+
+    <link rel="stylesheet" href="dist/html-elixir-NHQLCD6Y.css" />
+
+    <script defer src="dist/sidebar_items-4FF66F09.js"></script>
+    <script defer src="docs_config.js"></script>
+    <script defer src="dist/html-Y2MUTVIN.js"></script>
+
+  </head>
+  <body>
+    <script>(()=>{var t="ex_doc:settings",e="dark";var o="dark",s="light";var E="sidebar_state",n="closed";var r="sidebar_width";var a="sidebar-open";var i=new URLSearchParams(window.location.search),S=i.get("theme")||JSON.parse(localStorage.getItem(t)||"{}").theme;(S===o||S!==s&&window.matchMedia("(prefers-color-scheme: dark)").matches)&&document.body.classList.add(e);var d=sessionStorage.getItem(E),A=d!==n&&!window.matchMedia(`screen and (max-width: ${768}px)`).matches;document.body.classList.toggle(a,A);var c=sessionStorage.getItem(r);c&&document.body.style.setProperty("--sidebarWidth",`${c}px`);var p=/(Macintosh|iPhone|iPad|iPod)/.test(window.navigator.userAgent);document.documentElement.classList.toggle("apple-os",p);})();
+</script>
+
+<div class="body-wrapper">
+
+<button id="sidebar-menu" class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
+  <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+</button>
+
+<nav id="sidebar" class="sidebar">
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectInfo">
+
+      <div>
+        <a href="readme.html" class="sidebar-projectName" translate="no">
+spex
+        </a>
+        <div class="sidebar-projectVersion" translate="no">
+          v0.1.0
+        </div>
+      </div>
+    </div>
+    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras="Pages"></ul>
+  </div>
+</nav>
+
+<output role="status" id="toast"></output>
+
+<main class="content page-behaviour" id="main" data-type="modules">
+  <div id="content" class="content-inner">
+    <div class="top-search">
+      <div class="search-settings">
+        <form class="search-bar" action="search.html">
+          <label class="search-label">
+            <span class="sr-only">Search documentation of spex</span>
+            <div class="search-input-wrapper">
+              <input name="q" type="text" class="search-input" placeholder="Press / to search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+              <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+                <i class="ri-close-line ri-lg" title="Cancel search"></i>
+              </button>
+            </div>
+          </label>
+        </form>
+        <div class="autocomplete">
+        </div>
+        <div class="engine-selector" data-multiple="false">
+          <button type="button" class="engine-button" aria-label="Select search engine" aria-haspopup="true" aria-expanded="false">
+            <i class="ri-search-2-line" aria-hidden="true"></i>
+            <span class="engine-name">Default</span>
+            <i class="ri-arrow-down-s-line" aria-hidden="true"></i>
+          </button>
+          <div class="engine-dropdown" hidden role="menu">
+
+              <button type="button"
+                      class="engine-option"
+                      data-engine-url="search.html?q="
+                      role="menuitemradio"
+                      aria-checked="true">
+                <span class="name">Default</span>
+                <span class="help">In-browser search</span>
+              </button>
+
+          </div>
+        </div>
+        <button class="icon-settings display-settings">
+          <i class="ri-settings-3-line"></i>
+          <span class="sr-only">Settings</span>
+        </button>
+      </div>
+    </div>
+
+<div id="top-content">
+  <div class="heading-with-actions top-heading">
+    <h1>
+      <span translate="no">Spex.<wbr />InstanceManager</span> <small>behaviour</small>
+      <small class="app-vsn" translate="no">(spex v0.1.0)</small>
+
+    </h1>
+
+<a href="Spex.InstanceManager.md" title="Copy Markdown (hold Ctrl/Cmd and click it to open as Markdown)" class="copy-markdown icon-action" rel="help">
+  <i class="ri-markdown-line" aria-hidden="true"></i>
+  <span class="sr-only">Copy Markdown</span>
+</a>
+
+
+
+      <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex/instance_manager.ex#L1" title="View Source" class="icon-action" rel="help nofollow">
+        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        <span class="sr-only">View Source</span>
+      </a>
+
+  </div>
+
+
+    <section id="moduledoc">
+<p>Behaviour contract plus shared helpers for Spex instance managers.</p>
+    </section>
+
+</div>
+
+  <section id="summary" class="details-list">
+    <h2 class="section-heading">
+      <a class="hover-link" href="#summary">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Summary</span>
+    </h2>
+<div class="summary-types summary">
+  <h3>
+    <a href="#types">Types</a>
+  </h3>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#t:instance_manager_opt/0" data-no-tooltip="" translate="no">instance_manager_opt()</a>
+
+      </div>
+
+    </div>
+
+</div>
+<div class="summary-callbacks summary">
+  <h3>
+    <a href="#callbacks">Callbacks</a>
+  </h3>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#c:all_impl_models/0" data-no-tooltip="" translate="no">all_impl_models()</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Returns all currently known implementation models.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#c:all_instances/0" data-no-tooltip="" translate="no">all_instances()</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Returns all instances managed by this instance manager.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#c:all_instances/1" data-no-tooltip="" translate="no">all_instances(t)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Returns all instances for a given specification module.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#c:child_spec/1" data-no-tooltip="" translate="no">child_spec(term)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Returns a child spec for supervising the instance manager.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#c:delete_instance/1" data-no-tooltip="" translate="no">delete_instance(instance_identifier)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Deletes one instance by identifier.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#c:delete_instances/1" data-no-tooltip="" translate="no">delete_instances(function)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Deletes all instances matching the provided filter function.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#c:export_impl_models/0" data-no-tooltip="" translate="no">export_impl_models()</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Serialises and exports implementation models as <code class="inline">{filename, content}</code> tuples.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#c:get_instance/1" data-no-tooltip="" translate="no">get_instance(instance_identifier)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Fetches one instance by identifier.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#c:init_instance/4" data-no-tooltip="" translate="no">init_instance(t, instance_identifier, arg3, arg4)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Initializes a new instance and records initialisation as the first transition.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#c:init_instance!/4" data-no-tooltip="" translate="no">init_instance!(t, instance_identifier, arg3, arg4)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Same as <code class="inline">init_instance/4</code>, but raises on errors.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#c:init_instance_async/4" data-no-tooltip="" translate="no">init_instance_async(t, instance_identifier, arg3, arg4)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Asynchronously initializes a new instance.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#c:mock_instance!/4" data-no-tooltip="" translate="no">mock_instance!(t, instance_identifier, state, arg4)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Inserts or updates a mock instance at a given state for testing purposes.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#c:start_link/1" data-no-tooltip="" translate="no">start_link(list)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Starts the instance manager process tree.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#c:transition/3" data-no-tooltip="" translate="no">transition(instance_identifier, action, state)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Records an observed transition for an existing instance.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#c:transition!/3" data-no-tooltip="" translate="no">transition!(instance_identifier, action, state)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Same as <code class="inline">transition/3</code>, but raises on errors.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#c:transition_async/3" data-no-tooltip="" translate="no">transition_async(instance_identifier, action, state)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Asynchronously records a transition for an existing instance.</p></div>
+
+    </div>
+
+</div>
+<div class="summary-functions summary">
+  <h3>
+    <a href="#functions">Functions</a>
+  </h3>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#__using__/1" data-no-tooltip="" translate="no">__using__(_)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Injects the <a href="Spex.InstanceManager.html"><code class="inline">Spex.InstanceManager</code></a> behaviour and shared convenience functions.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#default_instance_manager/0" data-no-tooltip="" translate="no">default_instance_manager()</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Returns the compile-time configured default instance manager module.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#default_instance_manager_opts/0" data-no-tooltip="" translate="no">default_instance_manager_opts()</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Returns compile-time options for the default instance manager.</p></div>
+
+    </div>
+
+</div>
+
+  </section>
+
+
+  <section id="types" class="details-list">
+    <h2 class="section-heading">
+      <a class="hover-link" href="#types">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Types</span>
+    </h2>
+
+    <div class="types-list">
+<section class="detail" id="t:instance_manager_opt/0">
+
+  <div class="detail-header">
+    <a href="#t:instance_manager_opt/0" class="detail-link" data-no-tooltip="" aria-label="Link to this type">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">instance_manager_opt()</h1>
+
+
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex/instance_manager.ex#L6" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@type</span> instance_manager_opt() ::
+  <a href="Spex.InstanceManager.Server.html#t:server_opt/0">Spex.InstanceManager.Server.server_opt</a>() | (other_opt :: {<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()})</pre>
+
+      </div>
+
+
+  </section>
+</section>
+
+    </div>
+  </section>
+
+  <section id="callbacks" class="details-list">
+    <h2 class="section-heading">
+      <a class="hover-link" href="#callbacks">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Callbacks</span>
+    </h2>
+
+    <div class="callbacks-list">
+<section class="detail" id="c:all_impl_models/0">
+
+  <div class="detail-header">
+    <a href="#c:all_impl_models/0" class="detail-link" data-no-tooltip="" aria-label="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">all_impl_models()</h1>
+
+
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex/instance_manager.ex#L117" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> all_impl_models() :: {:ok, [<a href="Spex.ImplModel.html#t:t/0">Spex.ImplModel.t</a>()]}</pre>
+
+      </div>
+
+<p>Returns all currently known implementation models.</p>
+  </section>
+</section>
+<section class="detail" id="c:all_instances/0">
+
+  <div class="detail-header">
+    <a href="#c:all_instances/0" class="detail-link" data-no-tooltip="" aria-label="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">all_instances()</h1>
+
+
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex/instance_manager.ex#L93" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> all_instances() ::
+  {:ok, [<a href="Spex.InstanceManager.Instance.html#t:t/0">Spex.InstanceManager.Instance.t</a>()]}
+  | {:error, <a href="Spex.Errors.DetsError.html#t:t/0">Spex.Errors.DetsError.t</a>()}</pre>
+
+      </div>
+
+<p>Returns all instances managed by this instance manager.</p>
+  </section>
+</section>
+<section class="detail" id="c:all_instances/1">
+
+  <div class="detail-header">
+    <a href="#c:all_instances/1" class="detail-link" data-no-tooltip="" aria-label="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">all_instances(t)</h1>
+
+
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex/instance_manager.ex#L99" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> all_instances(<a href="Spex.Specification.html#t:t/0">Spex.Specification.t</a>()) ::
+  {:ok, [<a href="Spex.InstanceManager.Instance.html#t:t/0">Spex.InstanceManager.Instance.t</a>()]}
+  | {:error, <a href="Spex.Errors.DetsError.html#t:t/0">Spex.Errors.DetsError.t</a>()}</pre>
+
+      </div>
+
+<p>Returns all instances for a given specification module.</p>
+  </section>
+</section>
+<section class="detail" id="c:child_spec/1">
+
+  <div class="detail-header">
+    <a href="#c:child_spec/1" class="detail-link" data-no-tooltip="" aria-label="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">child_spec(term)</h1>
+
+
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex/instance_manager.ex#L12" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> child_spec(<a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()) :: <a href="https://hexdocs.pm/elixir/Supervisor.html#t:child_spec/0">Supervisor.child_spec</a>()</pre>
+
+      </div>
+
+<p>Returns a child spec for supervising the instance manager.</p>
+  </section>
+</section>
+<section class="detail" id="c:delete_instance/1">
+
+  <div class="detail-header">
+    <a href="#c:delete_instance/1" class="detail-link" data-no-tooltip="" aria-label="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">delete_instance(instance_identifier)</h1>
+
+
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex/instance_manager.ex#L105" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> delete_instance(<a href="Spex.InstanceManager.Instance.html#t:instance_identifier/0">Spex.InstanceManager.Instance.instance_identifier</a>()) ::
+  :ok | {:error, <a href="Spex.Errors.DetsError.html#t:t/0">Spex.Errors.DetsError.t</a>()}</pre>
+
+      </div>
+
+<p>Deletes one instance by identifier.</p>
+  </section>
+</section>
+<section class="detail" id="c:delete_instances/1">
+
+  <div class="detail-header">
+    <a href="#c:delete_instances/1" class="detail-link" data-no-tooltip="" aria-label="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">delete_instances(function)</h1>
+
+
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex/instance_manager.ex#L111" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> delete_instances((<a href="Spex.InstanceManager.Instance.html#t:t/0">Spex.InstanceManager.Instance.t</a>() -&gt; <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">as_boolean</a>(<a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()))) ::
+  :ok | {:error, <a href="Spex.Errors.DetsError.html#t:t/0">Spex.Errors.DetsError.t</a>()}</pre>
+
+      </div>
+
+<p>Deletes all instances matching the provided filter function.</p>
+  </section>
+</section>
+<section class="detail" id="c:export_impl_models/0">
+
+  <div class="detail-header">
+    <a href="#c:export_impl_models/0" class="detail-link" data-no-tooltip="" aria-label="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">export_impl_models()</h1>
+
+
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex/instance_manager.ex#L122" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> export_impl_models() ::
+  {:ok, [{filename :: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="Spex.ImplModel.html#t:serialisation/0">Spex.ImplModel.serialisation</a>()}]}</pre>
+
+      </div>
+
+<p>Serialises and exports implementation models as <code class="inline">{filename, content}</code> tuples.</p>
+  </section>
+</section>
+<section class="detail" id="c:get_instance/1">
+
+  <div class="detail-header">
+    <a href="#c:get_instance/1" class="detail-link" data-no-tooltip="" aria-label="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">get_instance(instance_identifier)</h1>
+
+
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex/instance_manager.ex#L85" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> get_instance(<a href="Spex.InstanceManager.Instance.html#t:instance_identifier/0">Spex.InstanceManager.Instance.instance_identifier</a>()) ::
+  {:ok, <a href="Spex.InstanceManager.Instance.html#t:t/0">Spex.InstanceManager.Instance.t</a>()}
+  | {:error, <a href="Spex.Errors.InstanceError.html#t:t/0">Spex.Errors.InstanceError.t</a>()}
+  | {:error, <a href="Spex.Errors.DetsError.html#t:t/0">Spex.Errors.DetsError.t</a>()}</pre>
+
+      </div>
+
+<p>Fetches one instance by identifier.</p>
+  </section>
+</section>
+<section class="detail" id="c:init_instance/4">
+
+  <div class="detail-header">
+    <a href="#c:init_instance/4" class="detail-link" data-no-tooltip="" aria-label="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">init_instance(t, instance_identifier, arg3, arg4)</h1>
+
+
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex/instance_manager.ex#L24" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> init_instance(
+  <a href="Spex.Specification.html#t:t/0">Spex.Specification.t</a>(),
+  <a href="Spex.InstanceManager.Instance.html#t:instance_identifier/0">Spex.InstanceManager.Instance.instance_identifier</a>(),
+  <a href="Spex.InstanceManager.Instance.html#t:meta/0">Spex.InstanceManager.Instance.meta</a>() | nil,
+  <a href="Spex.html#t:state/0">Spex.state</a>() | nil
+) :: :ok | <a href="Spex.Specification.html#t:error_handler_return/0">Spex.Specification.error_handler_return</a>()</pre>
+
+      </div>
+
+<p>Initializes a new instance and records initialisation as the first transition.</p><p>Returns <code class="inline">:ok</code> on success or an error-handler return when initialization fails.</p>
+  </section>
+</section>
+<section class="detail" id="c:init_instance!/4">
+
+  <div class="detail-header">
+    <a href="#c:init_instance!/4" class="detail-link" data-no-tooltip="" aria-label="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">init_instance!(t, instance_identifier, arg3, arg4)</h1>
+
+
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex/instance_manager.ex#L34" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> init_instance!(
+  <a href="Spex.Specification.html#t:t/0">Spex.Specification.t</a>(),
+  <a href="Spex.InstanceManager.Instance.html#t:instance_identifier/0">Spex.InstanceManager.Instance.instance_identifier</a>(),
+  <a href="Spex.InstanceManager.Instance.html#t:meta/0">Spex.InstanceManager.Instance.meta</a>() | nil,
+  <a href="Spex.html#t:state/0">Spex.state</a>() | nil
+) :: :ok</pre>
+
+      </div>
+
+<p>Same as <code class="inline">init_instance/4</code>, but raises on errors.</p>
+  </section>
+</section>
+<section class="detail" id="c:init_instance_async/4">
+
+  <div class="detail-header">
+    <a href="#c:init_instance_async/4" class="detail-link" data-no-tooltip="" aria-label="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">init_instance_async(t, instance_identifier, arg3, arg4)</h1>
+
+        <span class="note">(optional)</span>
+
+
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex/instance_manager.ex#L46" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> init_instance_async(
+  <a href="Spex.Specification.html#t:t/0">Spex.Specification.t</a>(),
+  <a href="Spex.InstanceManager.Instance.html#t:instance_identifier/0">Spex.InstanceManager.Instance.instance_identifier</a>(),
+  <a href="Spex.InstanceManager.Instance.html#t:meta/0">Spex.InstanceManager.Instance.meta</a>() | nil,
+  <a href="Spex.html#t:state/0">Spex.state</a>() | nil
+) :: :ok</pre>
+
+      </div>
+
+<p>Asynchronously initializes a new instance.</p><p>Errors are reported via specification error handling instead of direct return.</p>
+  </section>
+</section>
+<section class="detail" id="c:mock_instance!/4">
+
+  <div class="detail-header">
+    <a href="#c:mock_instance!/4" class="detail-link" data-no-tooltip="" aria-label="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">mock_instance!(t, instance_identifier, state, arg4)</h1>
+
+
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex/instance_manager.ex#L128" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> mock_instance!(
+  <a href="Spex.Specification.html#t:t/0">Spex.Specification.t</a>(),
+  <a href="Spex.InstanceManager.Instance.html#t:instance_identifier/0">Spex.InstanceManager.Instance.instance_identifier</a>(),
+  <a href="Spex.html#t:state/0">Spex.state</a>(),
+  <a href="Spex.InstanceManager.Instance.html#t:meta/0">Spex.InstanceManager.Instance.meta</a>() | nil
+) :: :ok</pre>
+
+      </div>
+
+<p>Inserts or updates a mock instance at a given state for testing purposes.</p>
+  </section>
+</section>
+<section class="detail" id="c:start_link/1">
+
+  <div class="detail-header">
+    <a href="#c:start_link/1" class="detail-link" data-no-tooltip="" aria-label="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">start_link(list)</h1>
+
+
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex/instance_manager.ex#L17" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> start_link([<a href="#t:instance_manager_opt/0">instance_manager_opt</a>()]) :: <a href="https://hexdocs.pm/elixir/Supervisor.html#t:on_start/0">Supervisor.on_start</a>()</pre>
+
+      </div>
+
+<p>Starts the instance manager process tree.</p>
+  </section>
+</section>
+<section class="detail" id="c:transition/3">
+
+  <div class="detail-header">
+    <a href="#c:transition/3" class="detail-link" data-no-tooltip="" aria-label="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">transition(instance_identifier, action, state)</h1>
+
+
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex/instance_manager.ex#L58" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> transition(
+  <a href="Spex.InstanceManager.Instance.html#t:instance_identifier/0">Spex.InstanceManager.Instance.instance_identifier</a>(),
+  <a href="Spex.html#t:action/0">Spex.action</a>(),
+  <a href="Spex.html#t:state/0">Spex.state</a>()
+) :: :ok | <a href="Spex.Specification.html#t:error_handler_return/0">Spex.Specification.error_handler_return</a>()</pre>
+
+      </div>
+
+<p>Records an observed transition for an existing instance.</p><p>Returns <code class="inline">:ok</code> on success or an error-handler return when validation/storage fails.</p>
+  </section>
+</section>
+<section class="detail" id="c:transition!/3">
+
+  <div class="detail-header">
+    <a href="#c:transition!/3" class="detail-link" data-no-tooltip="" aria-label="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">transition!(instance_identifier, action, state)</h1>
+
+
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex/instance_manager.ex#L67" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> transition!(
+  <a href="Spex.InstanceManager.Instance.html#t:instance_identifier/0">Spex.InstanceManager.Instance.instance_identifier</a>(),
+  <a href="Spex.html#t:action/0">Spex.action</a>(),
+  <a href="Spex.html#t:state/0">Spex.state</a>()
+) :: :ok</pre>
+
+      </div>
+
+<p>Same as <code class="inline">transition/3</code>, but raises on errors.</p>
+  </section>
+</section>
+<section class="detail" id="c:transition_async/3">
+
+  <div class="detail-header">
+    <a href="#c:transition_async/3" class="detail-link" data-no-tooltip="" aria-label="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">transition_async(instance_identifier, action, state)</h1>
+
+        <span class="note">(optional)</span>
+
+
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex/instance_manager.ex#L76" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> transition_async(
+  <a href="Spex.InstanceManager.Instance.html#t:instance_identifier/0">Spex.InstanceManager.Instance.instance_identifier</a>(),
+  <a href="Spex.html#t:action/0">Spex.action</a>(),
+  <a href="Spex.html#t:state/0">Spex.state</a>()
+) :: :ok</pre>
+
+      </div>
+
+<p>Asynchronously records a transition for an existing instance.</p>
+  </section>
+</section>
+
+    </div>
+  </section>
+
+  <section id="functions" class="details-list">
+    <h2 class="section-heading">
+      <a class="hover-link" href="#functions">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Functions</span>
+    </h2>
+
+    <div class="functions-list">
+<section class="detail" id="__using__/1">
+
+  <div class="detail-header">
+    <a href="#__using__/1" class="detail-link" data-no-tooltip="" aria-label="Link to this macro">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">__using__(_)</h1>
+
+        <span class="note">(macro)</span>
+
+
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex/instance_manager.ex#L146" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+<p>Injects the <a href="Spex.InstanceManager.html"><code class="inline">Spex.InstanceManager</code></a> behaviour and shared convenience functions.</p><p>Generated convenience functions:</p><ul><li><code class="inline">child_spec/1</code></li><li><code class="inline">init_instance!/4</code></li><li><code class="inline">transition!/3</code></li></ul>
+  </section>
+</section>
+<section class="detail" id="default_instance_manager/0">
+
+  <div class="detail-header">
+    <a href="#default_instance_manager/0" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">default_instance_manager()</h1>
+
+
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex/instance_manager.ex#L190" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> default_instance_manager() :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">module</a>()</pre>
+
+      </div>
+
+<p>Returns the compile-time configured default instance manager module.</p>
+  </section>
+</section>
+<section class="detail" id="default_instance_manager_opts/0">
+
+  <div class="detail-header">
+    <a href="#default_instance_manager_opts/0" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">default_instance_manager_opts()</h1>
+
+
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex/instance_manager.ex#L196" class="icon-action" rel="help nofollow" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> default_instance_manager_opts() :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">keyword</a>()</pre>
+
+      </div>
+
+<p>Returns compile-time options for the default instance manager.</p>
+  </section>
+</section>
+
+    </div>
+  </section>
+
+    <footer class="footer">
+
+        <p>
+
+            <span class="line">
+              <a href="https://hex.pm/packages/spex/0.1.0">Hex Package</a>
+
+              <a href="https://preview.hex.pm/preview/spex/0.1.0">Hex Preview</a>
+
+            </span>
+
+          <span class="line">
+            <button class="a-main footer-button display-quick-switch" title="Go to package docs">
+              Go to package docs
+            </button>
+
+              <a href="llms.txt" target="_blank">
+                View llms.txt
+              </a>
+
+
+              <a href="spex.epub">
+                Download ePub version
+              </a>
+
+          </span>
+        </p>
+
+        <p class="built-using">
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.40.2) for the
+
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+        </p>
+
+
+    </footer>
+  </div>
+</main>
+</div>
+
+  </body>
+</html>
