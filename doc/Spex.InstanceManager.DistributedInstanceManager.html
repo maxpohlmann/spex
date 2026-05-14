@@ -117,12 +117,12 @@ spex
 <p>Instance manager that shards instances across multiple
 <a href="Spex.InstanceManager.Server.html"><code class="inline">Spex.InstanceManager.Server</code></a> processes.</p><p>This manager hashes each instance identifier and routes operations to one of
 several server shards. It is useful when you want to reduce contention versus
-a single-manager setup while preserving the same high-level API.</p><p>This module is designed to be added directly to your supervision tree:</p><pre><code class="makeup elixir" translate="no"><span class="n">children</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="5868754832-1">[</span><span class="w">
-  </span><span class="p" data-group-id="5868754832-2">{</span><span class="nc">Spex.InstanceManager.DistributedInstanceManager</span><span class="p">,</span><span class="w">
+a single-manager setup while preserving the same high-level API.</p><p>This module is designed to be added directly to your supervision tree:</p><pre><code class="makeup elixir" translate="no"><span class="n">children</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="9896542972-1">[</span><span class="w">
+  </span><span class="p" data-group-id="9896542972-2">{</span><span class="nc">Spex.InstanceManager.DistributedInstanceManager</span><span class="p">,</span><span class="w">
    </span><span class="ss">distribution_factor</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
    </span><span class="ss">impl_models_dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;./spex_impl_models&quot;</span><span class="p">,</span><span class="w">
-   </span><span class="ss">dets_dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;./spex_dets&quot;</span><span class="p" data-group-id="5868754832-2">}</span><span class="w">
-</span><span class="p" data-group-id="5868754832-1">]</span></code></pre><p>You may pass options at startup or configure them in application config.</p><h2 id="module-configuration" class="section-heading"><a href="#module-configuration" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Configuration</span></h2><p>This manager accepts one distribution-specific option plus server options
+   </span><span class="ss">dets_dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;./spex_dets&quot;</span><span class="p" data-group-id="9896542972-2">}</span><span class="w">
+</span><span class="p" data-group-id="9896542972-1">]</span></code></pre><p>You may pass options at startup or configure them in application config.</p><h2 id="module-configuration" class="section-heading"><a href="#module-configuration" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Configuration</span></h2><p>This manager accepts one distribution-specific option plus server options
 forwarded to each shard (<code class="inline">Spex.InstanceManager.Server.server_opt()</code>).</p><ul><li><code class="inline">:distribution_factor</code> (<code class="inline">pos_integer()</code>)
 Number of server shards.
 Default: <code class="inline">4</code>.
@@ -146,7 +146,7 @@ results.</p><h2 id="module-application-config-example" class="section-heading"><
   </span><span class="ss">impl_models_dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;./priv/spex_impl_models&quot;</span><span class="p">,</span><span class="w">
   </span><span class="ss">dets_dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;./priv/spex_dets&quot;</span><span class="p">,</span><span class="w">
   </span><span class="ss">check_transition_timeouts_on_start?</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p">,</span><span class="w">
-  </span><span class="ss">prune_interval</span><span class="p">:</span><span class="w"> </span><span class="nc">:timer</span><span class="o">.</span><span class="n">hours</span><span class="p" data-group-id="2309402394-1">(</span><span class="mi">6</span><span class="p" data-group-id="2309402394-1">)</span></code></pre>
+  </span><span class="ss">prune_interval</span><span class="p">:</span><span class="w"> </span><span class="nc">:timer</span><span class="o">.</span><span class="n">hours</span><span class="p" data-group-id="8853001660-1">(</span><span class="mi">6</span><span class="p" data-group-id="8853001660-1">)</span></code></pre>
     </section>
 
 </div>
@@ -712,9 +712,9 @@ results.</p><h2 id="module-application-config-example" class="section-heading"><
         <p>
 
             <span class="line">
-              <a href="https://hex.pm/packages/spex/0.1.0">Hex Package</a>
+              <a href="https://hex.pm/packages/lts_spex/0.1.0">Hex Package</a>
 
-              <a href="https://preview.hex.pm/preview/spex/0.1.0">Hex Preview</a>
+              <a href="https://preview.hex.pm/preview/lts_spex/0.1.0">Hex Preview</a>
 
             </span>
 

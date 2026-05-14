@@ -185,10 +185,12 @@ Add `spex` to your dependencies:
 ```elixir
 def deps do
   [
-    {:spex, "~> 0.1.0"}
+    {:spex, "~> 0.1.0", hex: :lts_spex}
   ]
 end
 ```
+
+Note the `hex: :lts_spex`. The package name `:spex` itself was [already taken](https://hex.pm/packages/spex) (which I realised only after becoming attached to the name). However, since that package is unmaintained and not widely used, I decided to keep the namespace simply as `Spex`. The _lts_ prefix stands for _labelled transition system_.
 
 If you plan to supervise Spex yourself, you can also choose a `runtime: false`
 integration style and add `Spex` or one of the instance managers to your own

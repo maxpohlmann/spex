@@ -65,6 +65,7 @@ defmodule Spex.MixProject do
 
   defp package do
     [
+      name: "lts_spex",
       licenses: ["MIT"],
       links: %{
         "GitHub" => @source_url

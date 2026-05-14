@@ -185,10 +185,12 @@ Add `spex` to your dependencies:
 ```elixir
 def deps do
   [
-    {:spex, "~> 0.1.0"}
+    {:lts_spex, "~> 0.1.0"}
   ]
 end
 ```
+
+Note that the package name is `:lts_spex` rather than just `:spex`, since that was [already taken](https://hex.pm/packages/spex) (which I realised only after becoming attached to the name). Since the latter package is unmaintained and little used, I decided to keep the namespace simply as `Spex`.
 
 If you plan to supervise Spex yourself, you can also choose a `runtime: false`
 integration style and add `Spex` or one of the instance managers to your own
