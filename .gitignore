@@ -1,0 +1,5 @@
+/_build/
+/.expert/
+/deps/
+/spex_dets/
+/target/

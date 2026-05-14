@@ -1,0 +1,12 @@
+Specification: Elixir.SpexTest.Specifications.Cycle
+Learning mode: false
+Transitions:
+nil --[__initialisation__]-> x0
+x0 --[a]-> x1
+x1 --[b]-> x2
+x1 --[b]-> x2_
+x2 --[c]-> x3
+x2_ --[c]-> x3
+x3 --[__internal__]-> x0
+x3 --[__internal__]-> x4
+x4 --[__internal__]-> x0

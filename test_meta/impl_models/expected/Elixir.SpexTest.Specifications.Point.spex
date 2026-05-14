@@ -1,0 +1,5 @@
+Specification: Elixir.SpexTest.Specifications.Point
+Learning mode: false
+Transitions:
+nil --[__initialisation__]-> s0
+s0 --[a]-> s0

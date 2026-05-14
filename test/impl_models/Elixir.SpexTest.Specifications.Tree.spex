@@ -1,0 +1,8 @@
+Specification: Elixir.SpexTest.Specifications.Tree
+Learning mode: false
+Transitions:
+nil --[__initialisation__]-> s0
+s0 --[a]-> s1
+s0 --[a]-> s2
+s1 --[b]-> s3
+s1 --[c]-> s4

@@ -1,0 +1,14 @@
+[package]
+name = "spex_merc_wrapper"
+version = "0.1.0"
+authors = []
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+rustler = "0.37.3"
+merc_reduction = { git = "https://github.com/MERCorg/merc", rev = "f7e272575e4401f51e4789180e7aeeda286368c4" }
+merc_lts = { git = "https://github.com/MERCorg/merc", rev = "f7e272575e4401f51e4789180e7aeeda286368c4" }
+merc_utilities = { git = "https://github.com/MERCorg/merc", rev = "f7e272575e4401f51e4789180e7aeeda286368c4" }
