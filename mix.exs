@@ -82,7 +82,9 @@ defmodule Spex.MixProject do
   def cli do
     [
       preferred_envs: [
-        spex: :test
+        spex: :test,
+        credo: :test,
+        dialyzer: :test
       ]
     ]
   end
