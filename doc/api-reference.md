@@ -1,4 +1,4 @@
-# spex v0.1.0 - API Reference
+# spex v0.1.1 - API Reference
 
 ## Modules
 
@@ -21,8 +21,7 @@
 
 - [Spex.InstanceManager](Spex.InstanceManager.md): Behaviour contract plus shared helpers for Spex instance managers.
 
-- [Spex.InstanceManager.DistributedInstanceManager](Spex.InstanceManager.DistributedInstanceManager.md): Instance manager that shards instances across multiple
-`Spex.InstanceManager.Server` processes.
+- [Spex.InstanceManager.DistributedInstanceManager](Spex.InstanceManager.DistributedInstanceManager.md): Instance manager that shards instances across multiple `Spex.InstanceManager.Server` processes.
 - [Spex.InstanceManager.DistributedInstanceManager.DistributionFactorState](Spex.InstanceManager.DistributedInstanceManager.DistributionFactorState.md): Agent storing the configured distribution factor.
 
 - [Spex.InstanceManager.Instance](Spex.InstanceManager.Instance.md): Runtime representation of a specification instance and its observed history.
@@ -45,5 +44,5 @@
 
 ## Mix Tasks
 
-- [mix spex](Mix.Tasks.Spex.md): Mix task that checks saved implementation models for bisimilarity.
+- [mix spex](Mix.Tasks.Spex.md): Mix task that checks saved implementation models for behavioural equivalence.
 

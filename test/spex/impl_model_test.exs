@@ -37,7 +37,7 @@ defmodule Spex.ImplModelTest do
       assert {:ok, ^impl_model} = ImplModel.observe_transition(impl_model, transition)
     end
 
-    test "returns :deviation_still_bisimilar for reflexive internal transition outside learning mode" do
+    test "returns :deviation_still_equivalent for reflexive internal transition outside learning mode" do
       impl_model = %ImplModel{
         specification: Tree,
         transitions:
@@ -47,11 +47,11 @@ defmodule Spex.ImplModelTest do
 
       transition = {:s0, :__internal__, :s0}
 
-      assert {:deviation_still_bisimilar, ^impl_model} =
+      assert {:deviation_still_equivalent, ^impl_model} =
                ImplModel.observe_transition(impl_model, transition)
     end
 
-    test "returns :deviation_not_bisimilar for breaking deviation outside learning mode" do
+    test "returns :deviation_not_equivalent for breaking deviation outside learning mode" do
       impl_model = %ImplModel{
         specification: Tree,
         transitions:
@@ -61,7 +61,7 @@ defmodule Spex.ImplModelTest do
 
       transition = {:s0, :b, :s1}
 
-      assert {:deviation_not_bisimilar, ^impl_model} =
+      assert {:deviation_not_equivalent, ^impl_model} =
                ImplModel.observe_transition(impl_model, transition)
     end
   end

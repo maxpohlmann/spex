@@ -7,7 +7,7 @@ Represents the observed implementation model built from runtime transitions.
 
 ```elixir
 @type observation_status() ::
-  :ok | :deviation_still_bisimilar | :deviation_not_bisimilar
+  :ok | :deviation_still_equivalent | :deviation_not_equivalent
 ```
 
 # `serialisation`
@@ -60,7 +60,8 @@ is checked for bisimilarity impact without mutating stored transitions.
 @spec serialise(t()) :: serialisation()
 ```
 
-Serialises an implementation model into `.spex` text format.
+Serialises an implementation model into `.spex` text format. For info on the format, just see the
+implementation of this function.
 
 ---
 

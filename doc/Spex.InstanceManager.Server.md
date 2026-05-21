@@ -3,16 +3,7 @@
 
 Core GenServer that manages instances and implementation-model observation.
 
-This process is the stateful runtime engine behind both simple and
-distributed instance managers.
-
-Responsibilities include:
-
-- loading implementation models on startup,
-- storing and retrieving instances via `Spex.InstanceManager.InstanceStore`,
-- validating observed transitions against implementation models,
-- scheduling transition timeout checks,
-- pruning stale instances.
+This process is the stateful runtime engine behind instance managers.
 
 # `impl_models_map`
 

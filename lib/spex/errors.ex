@@ -43,8 +43,8 @@ defmodule Spex.Errors do
 
     use Template,
       reasons: [
-        :deviation_still_bisimilar,
-        :deviation_not_bisimilar,
+        :deviation_still_equivalent,
+        :deviation_not_equivalent,
         :transition_timeout
       ]
   end

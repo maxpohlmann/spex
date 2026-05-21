@@ -46,7 +46,7 @@ defmodule Spex.InstanceManager.SimpleInstanceManagerTest do
 
       assert {:error, error} = SimpleInstanceManager.init_instance(Tree, identifier, nil, :s2)
       assert is_struct(error, Spex.Errors.TransitionError)
-      assert error.reason == :deviation_not_bisimilar
+      assert error.reason == :deviation_not_equivalent
       assert error.context.instance.identifier == identifier
       assert error.context.instance.current_state == :s2
       assert error.context.deviating_transition == {nil, :__initialisation__, :s2}
@@ -187,7 +187,7 @@ defmodule Spex.InstanceManager.SimpleInstanceManagerTest do
       # reflexive internal transition makes the resulting impl_model still bisimilar
       assert {:error, error} = SimpleInstanceManager.transition(identifier, :__internal__, :s0)
       assert is_struct(error, Spex.Errors.TransitionError)
-      assert error.reason == :deviation_still_bisimilar
+      assert error.reason == :deviation_still_equivalent
       assert error.context.instance.identifier == identifier
       assert error.context.deviating_transition == {:s0, :__internal__, :s0}
 
@@ -211,7 +211,7 @@ defmodule Spex.InstanceManager.SimpleInstanceManagerTest do
       # this transition breaks the specification
       assert {:error, error} = SimpleInstanceManager.transition(identifier, :b, :s1)
       assert is_struct(error, Spex.Errors.TransitionError)
-      assert error.reason == :deviation_not_bisimilar
+      assert error.reason == :deviation_not_equivalent
       assert error.context.instance.identifier == identifier
       assert error.context.deviating_transition == {:s0, :b, :s1}
 
@@ -276,7 +276,7 @@ defmodule Spex.InstanceManager.SimpleInstanceManagerTest do
       identifier = random_identifier(Tree)
       :ok = SimpleInstanceManager.mock_instance!(Tree, identifier, :s0)
 
-      assert_raise Spex.Errors.TransitionError, ~r/deviation_not_bisimilar/, fn ->
+      assert_raise Spex.Errors.TransitionError, ~r/deviation_not_equivalent/, fn ->
         SimpleInstanceManager.transition!(identifier, :b, :s1)
       end
     end
@@ -301,7 +301,7 @@ defmodule Spex.InstanceManager.SimpleInstanceManagerTest do
 
       assert_receive {:from_error_handler, error}
       assert is_struct(error, Spex.Errors.TransitionError)
-      assert error.reason == :deviation_not_bisimilar
+      assert error.reason == :deviation_not_equivalent
       assert error.context.instance.identifier == identifier
       assert error.context.deviating_transition == {:s0, :b, :s1}
     end

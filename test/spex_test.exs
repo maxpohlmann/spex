@@ -2,9 +2,11 @@ defmodule Spex.SpexTest do
   use ExUnit.Case, async: true
 
   test "child_spec/1 returns expected result" do
-    assert Spex.child_spec(nil) == %{
+    assert Spex.child_spec(impl_models_dir: "imps") == %{
              id: Spex.InstanceManager.SimpleInstanceManager,
-             start: {Spex.InstanceManager.SimpleInstanceManager, :start_link, [[]]}
+             start:
+               {Spex.InstanceManager.SimpleInstanceManager, :start_link,
+                [[impl_models_dir: "imps"]]}
            }
   end
 

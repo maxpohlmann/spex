@@ -7,7 +7,7 @@ REPO_ROOT="$(cd -- "$SCRIPT_DIR/.." && pwd)"
 INITIAL_DIR="$SCRIPT_DIR/impl_models/initial"
 LIVE_DIR="$SCRIPT_DIR/impl_models/live"
 EXPECTED_DIR="$SCRIPT_DIR/impl_models/expected"
-EXPECTED_SPEX_OUTPUT='[Spex] 2 out of 4 ImplModels are not bisimilar to their specifications.'
+EXPECTED_SPEX_OUTPUT='[Spex] 2 out of 4 ImplModels are not behaviourally equivalent to their specifications.'
 
 # Reset the live fixtures to the known starting state before running meta tests.
 find "$LIVE_DIR" -mindepth 1 -maxdepth 1 -exec rm -rf {} +

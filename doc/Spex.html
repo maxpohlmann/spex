@@ -5,14 +5,14 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.40.2">
-    <meta name="project" content="spex v0.1.0">
+    <meta name="project" content="spex v0.1.1">
 
 
-    <title>Spex — spex v0.1.0</title>
+    <title>Spex — spex v0.1.1</title>
 
     <link rel="stylesheet" href="dist/html-elixir-NHQLCD6Y.css" />
 
-    <script defer src="dist/sidebar_items-4FF66F09.js"></script>
+    <script defer src="dist/sidebar_items-C4A89118.js"></script>
     <script defer src="docs_config.js"></script>
     <script defer src="dist/html-Y2MUTVIN.js"></script>
 
@@ -37,7 +37,7 @@
 spex
         </a>
         <div class="sidebar-projectVersion" translate="no">
-          v0.1.0
+          v0.1.1
         </div>
       </div>
     </div>
@@ -94,7 +94,7 @@ spex
   <div class="heading-with-actions top-heading">
     <h1>
       <span translate="no">Spex</span> 
-      <small class="app-vsn" translate="no">(spex v0.1.0)</small>
+      <small class="app-vsn" translate="no">(spex v0.1.1)</small>
 
     </h1>
 
@@ -114,34 +114,157 @@ spex
 
 
     <section id="moduledoc">
-<p>Entry point for Spex runtime APIs and high-level integration.</p><p>Spex tracks observed runtime behaviour as implementation models and compares
-those models to declarative specifications (LTSs). It is designed for:</p><ul><li>online runtime observation (<code class="inline">init_instance*</code>, <code class="inline">transition*</code>),</li><li>detection/reporting of behavioural deviations,</li><li>export and offline checking of derived implementation models.</li></ul><h2 id="module-quick-start" class="section-heading"><a href="#module-quick-start" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Quick Start</span></h2><ol><li>Define one or more specifications with <a href="Spex.Specification.html"><code class="inline">Spex.Specification</code></a>.</li><li>Start Spex (or an instance manager) under a supervisor.</li><li>Initialize instances with <a href="#init_instance/4"><code class="inline">init_instance/4</code></a>.</li><li>Feed observed transitions with <a href="#transition/3"><code class="inline">transition/3</code></a>.</li></ol><p>Minimal usage example:</p><pre><code class="makeup elixir" translate="no"><span class="ss">:ok</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Spex</span><span class="o">.</span><span class="n">init_instance</span><span class="p" data-group-id="7274225117-1">(</span><span class="nc">MySpec</span><span class="p">,</span><span class="w"> </span><span class="ss">:order_123</span><span class="p" data-group-id="7274225117-1">)</span><span class="w">
-</span><span class="ss">:ok</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Spex</span><span class="o">.</span><span class="n">transition</span><span class="p" data-group-id="7274225117-2">(</span><span class="ss">:order_123</span><span class="p">,</span><span class="w"> </span><span class="ss">:pay</span><span class="p">,</span><span class="w"> </span><span class="ss">:paid</span><span class="p" data-group-id="7274225117-2">)</span><span class="w">
-</span><span class="ss">:ok</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Spex</span><span class="o">.</span><span class="n">transition</span><span class="p" data-group-id="7274225117-3">(</span><span class="ss">:order_123</span><span class="p">,</span><span class="w"> </span><span class="ss">:ship</span><span class="p">,</span><span class="w"> </span><span class="ss">:shipped</span><span class="p" data-group-id="7274225117-3">)</span></code></pre><h2 id="module-how-to-start-spex" class="section-heading"><a href="#module-how-to-start-spex" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">How To Start Spex</span></h2><p>There are two primary integration styles.</p><h3 id="module-1-spex-as-its-own-otp-application" class="section-heading"><a href="#module-1-spex-as-its-own-otp-application" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">1) Spex As Its Own OTP Application</span></h3><p>This is the usual setup when the dependency is started normally
-(<code class="inline">runtime: true</code>, default). Your app depends on Spex and Spex boots its own
-supervision tree.</p><h3 id="module-2-explicit-supervision-runtime-false" class="section-heading"><a href="#module-2-explicit-supervision-runtime-false" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">2) Explicit Supervision (<code class="inline">runtime: false</code>)</span></h3><p>If Spex is configured with <code class="inline">runtime: false</code>, add either <a href="Spex.html"><code class="inline">Spex</code></a> or a concrete
-instance manager directly to your supervision tree:</p><pre><code class="makeup elixir" translate="no"><span class="n">children</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="2379049631-1">[</span><span class="w">
-  </span><span class="nc">Spex</span><span class="w">
-</span><span class="p" data-group-id="2379049631-1">]</span></code></pre><p>or:</p><pre><code class="makeup elixir" translate="no"><span class="n">children</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="9270863980-1">[</span><span class="w">
-  </span><span class="p" data-group-id="9270863980-2">{</span><span class="nc">Spex.InstanceManager.SimpleInstanceManager</span><span class="p">,</span><span class="w">
-   </span><span class="ss">impl_models_dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;./spex_impl_models&quot;</span><span class="p">,</span><span class="w">
-   </span><span class="ss">dets_dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;./spex_dets&quot;</span><span class="p" data-group-id="9270863980-2">}</span><span class="w">
-</span><span class="p" data-group-id="9270863980-1">]</span></code></pre><p>or:</p><pre><code class="makeup elixir" translate="no"><span class="n">children</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="0933474578-1">[</span><span class="w">
-  </span><span class="p" data-group-id="0933474578-2">{</span><span class="nc">Spex.InstanceManager.DistributedInstanceManager</span><span class="p">,</span><span class="w">
-   </span><span class="ss">distribution_factor</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
-   </span><span class="ss">impl_models_dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;./spex_impl_models&quot;</span><span class="p">,</span><span class="w">
-   </span><span class="ss">dets_dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;./spex_dets&quot;</span><span class="p" data-group-id="0933474578-2">}</span><span class="w">
-</span><span class="p" data-group-id="0933474578-1">]</span></code></pre><h2 id="module-online-production-usage" class="section-heading"><a href="#module-online-production-usage" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Online Production Usage</span></h2><p>In production, call <a href="#init_instance/4"><code class="inline">init_instance/4</code></a> when a domain entity begins its tracked
-lifecycle, then call <a href="#transition/3"><code class="inline">transition/3</code></a> for each observed state change.</p><p>Behavioural checks and error handling are driven by the underlying
-specification (<code class="inline">error_handler/2</code>, timeout settings, pruning rules).</p><h2 id="module-implmodel-derivation-during-tests" class="section-heading"><a href="#module-implmodel-derivation-during-tests" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">ImplModel Derivation During Tests</span></h2><p>Spex can derive implementation models from test execution and persist them as
-<code class="inline">.spex</code> files. The main purpose of this derivation flow is to run offline
-bisimilarity checks with the <a href="Mix.Tasks.Spex.html"><code class="inline">mix spex</code></a> task.</p><p>Typical flow:</p><ul><li>call <a href="Spex.Testing.html#prepare_for_test_suite/1"><code class="inline">Spex.Testing.prepare_for_test_suite/1</code></a> in test setup,</li><li>run tests while using normal Spex APIs,</li><li>after suite completion, derived models are exported,</li><li>run <a href="Mix.Tasks.Spex.html"><code class="inline">mix spex</code></a> (or <code class="inline">mix spex &lt;path&gt;</code>) to validate derived models.</li></ul><p>Example:</p><pre><code class="makeup elixir" translate="no"><span class="c1"># test/test_helper.exs</span><span class="w">
-</span><span class="nc">Spex.Testing</span><span class="o">.</span><span class="n">prepare_for_test_suite</span><span class="p" data-group-id="2581763435-1">(</span><span class="ss">impl_models_dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;./test_meta/impl_models/live&quot;</span><span class="p" data-group-id="2581763435-1">)</span><span class="w">
+<p>Entry point for Spex runtime APIs and high-level integration.</p><h2 id="module-install-configure-and-start-spex" class="section-heading"><a href="#module-install-configure-and-start-spex" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Install, configure, and start Spex</span></h2><p>Add Spex to your dependencies:</p><pre><code class="makeup elixir" translate="no"><span class="kd">def</span><span class="w"> </span><span class="nf">deps</span><span class="w"> </span><span class="k" data-group-id="4835671136-1">do</span><span class="w">
+</span><span class="p" data-group-id="4835671136-2">[</span><span class="w">
+  </span><span class="p" data-group-id="4835671136-3">{</span><span class="ss">:spex</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;~&gt; 0.1.1&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">hex</span><span class="p">:</span><span class="w"> </span><span class="ss">:lts_spex</span><span class="p" data-group-id="4835671136-3">}</span><span class="w">
+</span><span class="p" data-group-id="4835671136-2">]</span><span class="w">
+</span><span class="k" data-group-id="4835671136-1">end</span></code></pre><p>Please note the <code class="inline">hex: :lts_spex</code>.
+The package name <code class="inline">:spex</code> itself was <a href="https://hex.pm/packages/spex">already taken</a> (which I
+realised only after becoming attached to the name). However, since that package is unmaintained
+and not widely used, I decided to keep the namespace simply as <a href="Spex.html"><code class="inline">Spex</code></a>. The <em>lts</em> prefix stands for
+<em>labelled transition system</em> (see the <a href="readme.html#theoretical-background">Theoretical background section of the readme</a>).</p><p>Optionally, add <code class="inline">:spex</code> to your <a href="https://hexdocs.pm/mix/main/Mix.Tasks.Format.html#module-importing-dependencies-configuration"><code class="inline">.formatter.exs</code> file under <code class="inline">:import_deps</code></a>.</p><h3 id="module-configuration" class="section-heading"><a href="#module-configuration" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Configuration</span></h3><p>The derived implementation models are stored in a custom format in a given folder. Ideally, this
+should be within the priv directory of your application (<code class="inline">:code.priv_dir(:your_app)</code>).</p><p><a href="https://www.erlang.org/doc/apps/stdlib/dets.html"><code class="inline">:dets</code></a> is used to persist information about
+instances (like previous transitions). You can configure the directory in which these dets files
+are stored.</p><p>When you specify a transition timeout in your specification (see <a href="Spex.Specification.html"><code class="inline">Spex.Specification</code></a>), timeouts
+are detected and reported. You might or might not want to have these timeouts checked at
+application startup for persisted instances. Enabling it might lead to many timeout reports at
+startup, disabling it might lead to missed timeouts.</p><p>Similarly, you can specify prunable states and prune timeouts to avoid storing instances
+indefinitely. You can configure how often this pruning should happen.</p><p>Here is a sample configuration with the default values:</p><pre><code class="makeup elixir" translate="no"><span class="n">config</span><span class="w"> </span><span class="ss">:spex</span><span class="p">,</span><span class="w">
+  </span><span class="ss">impl_models_dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;./spex_impl_models&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="ss">dets_dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;./spex_dets&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="ss">check_transition_timeouts_on_start?</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p">,</span><span class="w">
+  </span><span class="ss">prune_interval</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2552605583-1">%</span><span class="nc" data-group-id="2552605583-1">Duration</span><span class="p" data-group-id="2552605583-1">{</span><span class="ss">hour</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p" data-group-id="2552605583-1">}</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">to_timeout</span><span class="p" data-group-id="2552605583-2">(</span><span class="p" data-group-id="2552605583-2">)</span></code></pre><h3 id="module-manual-supervision" class="section-heading"><a href="#module-manual-supervision" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Manual Supervision</span></h3><p>By default, Spex starts its own application incl. supervision tree and is usable right away. If
+you'd rather supervise it yourself, you can also disable the Spex application and add it to your
+supervision tree manually:</p><pre><code class="makeup elixir" translate="no"><span class="kd">def</span><span class="w"> </span><span class="nf">deps</span><span class="w"> </span><span class="k" data-group-id="6069285759-1">do</span><span class="w">
+</span><span class="p" data-group-id="6069285759-2">[</span><span class="w">
+  </span><span class="p" data-group-id="6069285759-3">{</span><span class="ss">:spex</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;~&gt; 0.1.1&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">hex</span><span class="p">:</span><span class="w"> </span><span class="ss">:lts_spex</span><span class="p">,</span><span class="w"> </span><span class="ss">runtime</span><span class="p">:</span><span class="w"> </span><span class="no">false</span><span class="p" data-group-id="6069285759-3">}</span><span class="w">
+</span><span class="p" data-group-id="6069285759-2">]</span><span class="w">
+</span><span class="k" data-group-id="6069285759-1">end</span><span class="w">
 
-</span><span class="c1"># CI or local verification</span><span class="w">
-</span><span class="c1"># Uses configured :impl_models_dir when no path is given</span><span class="w">
-</span><span class="n">mix</span><span class="w"> </span><span class="n">spex</span></code></pre><h2 id="module-configuration-entry-point" class="section-heading"><a href="#module-configuration-entry-point" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Configuration Entry Point</span></h2><p>This module delegates to a compile-time default instance manager selected via
-<code class="inline">config :spex, :instance_manager</code>.</p><p>Accepted forms are:</p><ul><li><code class="inline">MyManagerModule</code></li><li><code class="inline">{MyManagerModule, manager_opts}</code></li></ul><h2 id="module-documentation-map" class="section-heading"><a href="#module-documentation-map" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Documentation Map</span></h2><ul><li><a href="Spex.Specification.html"><code class="inline">Spex.Specification</code></a>: define specifications and options.</li><li><a href="Spex.InstanceManager.html"><code class="inline">Spex.InstanceManager</code></a>: behaviour contract for manager implementations.</li><li><a href="Spex.InstanceManager.SimpleInstanceManager.html"><code class="inline">Spex.InstanceManager.SimpleInstanceManager</code></a>: single-node manager setup.</li><li><a href="Spex.InstanceManager.DistributedInstanceManager.html"><code class="inline">Spex.InstanceManager.DistributedInstanceManager</code></a>: sharded manager setup.</li><li><a href="Spex.Testing.html"><code class="inline">Spex.Testing</code></a>: test helpers and suite-level model export.</li><li><a href="Spex.ImplModel.html"><code class="inline">Spex.ImplModel</code></a> / <a href="Spex.ImplModelStore.html"><code class="inline">Spex.ImplModelStore</code></a>: model representation and storage.</li><li><a href="Spex.BisimilarityChecker.html"><code class="inline">Spex.BisimilarityChecker</code></a>: bisimilarity validation internals.</li><li><a href="Mix.Tasks.Spex.html"><code class="inline">Mix.Tasks.Spex</code></a>: offline bisimilarity checks over saved <code class="inline">.spex</code> files.</li></ul>
+
+</span><span class="n">children</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="6069285759-4">[</span><span class="w">
+  </span><span class="n">...</span><span class="p">,</span><span class="w">
+  </span><span class="p" data-group-id="6069285759-5">{</span><span class="nc">Spex</span><span class="p">,</span><span class="w"> </span><span class="n">spex_config_opts</span><span class="p" data-group-id="6069285759-5">}</span><span class="w">
+</span><span class="p" data-group-id="6069285759-4">]</span><span class="w">
+
+</span><span class="nc">Supervisor</span><span class="o">.</span><span class="n">start</span><span class="p" data-group-id="6069285759-6">(</span><span class="n">children</span><span class="p">,</span><span class="w"> </span><span class="n">supervisor_opts</span><span class="p" data-group-id="6069285759-6">)</span></code></pre><p>Note that you can pass spex_config_opts to Spex here. These options are the same as the ones
+described in the configuration section above.</p><h3 id="module-using-other-instance-managers" class="section-heading"><a href="#module-using-other-instance-managers" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Using other instance managers</span></h3><p>By default, <a href="Spex.html"><code class="inline">Spex</code></a> is a convenience front for the <a href="Spex.InstanceManager.SimpleInstanceManager.html"><code class="inline">Spex.InstanceManager.SimpleInstanceManager</code></a>,
+which starts a single GenServer that handles all instances. Should this become a bottleneck, there
+is also the <a href="Spex.InstanceManager.DistributedInstanceManager.html"><code class="inline">Spex.InstanceManager.DistributedInstanceManager</code></a>. To use it, you can configure it as
+follows (note that this a compile time config):</p><pre><code class="makeup elixir" translate="no"><span class="n">config</span><span class="w"> </span><span class="ss">:spex</span><span class="p">,</span><span class="w">
+  </span><span class="ss">instance_manager</span><span class="p">:</span><span class="w"> </span><span class="nc">Spex.InstanceManager.DistributedInstanceManager</span><span class="p">,</span><span class="w">
+  </span><span class="ss">instance_manager_opts</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7442223276-1">[</span><span class="ss">distribution_factor</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p" data-group-id="7442223276-1">]</span><span class="w"> </span><span class="c1"># 4 is the default</span></code></pre><p>Alternatively, you can also add either instance manager to your supervision tree directly, e.g.:</p><pre><code class="makeup elixir" translate="no"><span class="n">children</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="8521377288-1">[</span><span class="w">
+  </span><span class="n">...</span><span class="p">,</span><span class="w">
+  </span><span class="c1"># spex_config_opts are the same as the ones described in the configuration section above</span><span class="w">
+  </span><span class="p" data-group-id="8521377288-2">{</span><span class="nc">Spex.InstanceManager.DistributedInstanceManager</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8521377288-3">[</span><span class="ss">distribution_factor</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p" data-group-id="8521377288-3">]</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="n">spex_config_opts</span><span class="p" data-group-id="8521377288-2">}</span><span class="w">
+</span><span class="p" data-group-id="8521377288-1">]</span><span class="w">
+
+</span><span class="nc">Supervisor</span><span class="o">.</span><span class="n">start</span><span class="p" data-group-id="8521377288-4">(</span><span class="n">children</span><span class="p">,</span><span class="w"> </span><span class="n">supervisor_opts</span><span class="p" data-group-id="8521377288-4">)</span></code></pre><p>If you choose to do this, however, do note that <a href="Spex.html"><code class="inline">Spex</code></a> does no longer work as a convenience front
+and you need to make all calls to your chosen instance manager directly (e.g.
+<code class="inline">Spex.InstanceManager.DistributedInstanceManager.transition(...)</code> rather than
+<code class="inline">Spex.transition(...)</code>).</p><h3 id="module-define-specifications" class="section-heading"><a href="#module-define-specifications" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Define specifications</span></h3><p>Specifications represent protocols or workflows and are modelled as graphs / state machines. The
+focus lies on the transitions (edges) rather than the states (nodes): when we compare an
+implementation model against its specification, their states can be entirely distinct, since
+behavioural equivalence is judged entirely based on their transition behaviours (basically: action
+sequences).</p><p>In the simplest case, you can create a specification as follows:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">YourApp.Specifications.Tree</span><span class="w"> </span><span class="k" data-group-id="5987352630-1">do</span><span class="w">
+  </span><span class="na">@moduledoc</span><span class="w"> </span><span class="s">&quot;&quot;&quot;
+  A specification that forms a small, simple tree structure:
+
+               s0
+              /  |
+            a/    |a
+            /      |
+          s1       s2
+          / |
+        b/   |c
+        /     |
+      s3      s4
+
+  &quot;&quot;&quot;</span><span class="w">
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Spex.Specification</span><span class="w">
+
+  </span><span class="n">def_transition</span><span class="w"> </span><span class="ss">:s0</span><span class="p">,</span><span class="w"> </span><span class="ss">:a</span><span class="p">,</span><span class="w"> </span><span class="ss">:s1</span><span class="w">
+  </span><span class="n">def_transition</span><span class="w"> </span><span class="ss">:s0</span><span class="p">,</span><span class="w"> </span><span class="ss">:a</span><span class="p">,</span><span class="w"> </span><span class="ss">:s2</span><span class="w">
+
+  </span><span class="n">def_transition</span><span class="w"> </span><span class="ss">:s1</span><span class="p">,</span><span class="w"> </span><span class="ss">:b</span><span class="p">,</span><span class="w"> </span><span class="ss">:s3</span><span class="w">
+  </span><span class="n">def_transition</span><span class="w"> </span><span class="ss">:s1</span><span class="p">,</span><span class="w"> </span><span class="ss">:c</span><span class="p">,</span><span class="w"> </span><span class="ss">:s4</span><span class="w">
+</span><span class="k" data-group-id="5987352630-1">end</span></code></pre><p>Each <em>transition</em> consists of a <em>from_state</em>, an <em>action</em>, and a <em>to_state</em>.</p><p>Specifications can have custom error handlers, to which any reported errors are passed for
+processing, e.g. logging and deciding which errors are okay.</p><p>For details on configuring and customising specifications, see <a href="Spex.Specification.html"><code class="inline">Spex.Specification</code></a>.</p><h3 id="module-observe-transitions-in-your-implementation" class="section-heading"><a href="#module-observe-transitions-in-your-implementation" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Observe transitions in your implementation</span></h3><p>In your actual implementation code, you need to initialise instances of your specification and
+record transitions.</p><p>As a useless toy example, say we manage a pine forest where each pine has a number. We offer a
+function for planting a seedling:</p><pre><code class="makeup elixir" translate="no"><span class="kn">alias</span><span class="w"> </span><span class="nc">YourApp.Specifications.Tree</span><span class="w">
+
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">plant_seedling</span><span class="p" data-group-id="1173343882-1">(</span><span class="n">pine_id</span><span class="p" data-group-id="1173343882-1">)</span><span class="w"> </span><span class="k" data-group-id="1173343882-2">do</span><span class="w">
+  </span><span class="n">specification</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Tree</span><span class="w">
+  </span><span class="n">instance_identifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="1173343882-3">{</span><span class="nc">Tree</span><span class="p">,</span><span class="w"> </span><span class="n">pine_id</span><span class="p" data-group-id="1173343882-3">}</span><span class="w">
+  </span><span class="n">meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="1173343882-4">%{</span><span class="ss">planting_datetime</span><span class="p">:</span><span class="w"> </span><span class="nc">DateTime</span><span class="o">.</span><span class="n">utc_now</span><span class="p" data-group-id="1173343882-5">(</span><span class="p" data-group-id="1173343882-5">)</span><span class="p" data-group-id="1173343882-4">}</span><span class="w">
+  </span><span class="n">initial_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">:seedling</span><span class="w">
+
+  </span><span class="nc">Spex</span><span class="o">.</span><span class="n">init_instance</span><span class="p" data-group-id="1173343882-6">(</span><span class="n">specification</span><span class="p">,</span><span class="w"> </span><span class="n">instance_identifier</span><span class="p">,</span><span class="w"> </span><span class="n">meta</span><span class="p">,</span><span class="w"> </span><span class="n">initial_state</span><span class="p" data-group-id="1173343882-6">)</span><span class="w">
+</span><span class="k" data-group-id="1173343882-2">end</span></code></pre><p>Note that the instance identifier is an arbitrary term that uniquely identifies the instance
+across all specifications (hence it can make sense to include the specification module). The meta
+can optionally be added to make possible error reports regarding the instance more useful. The
+initial state is also optional and defaults to the specification's initial state.</p><p>After an instance is initialised, we can record its transitions with
+<code class="inline">Spex.transition(instance_identifier, action, new_state)</code>:</p><pre><code class="makeup elixir" translate="no"><span class="kd">def</span><span class="w"> </span><span class="nf">pour_onto</span><span class="p" data-group-id="2444000348-1">(</span><span class="n">pine_id</span><span class="p">,</span><span class="w"> </span><span class="ss">:water</span><span class="p" data-group-id="2444000348-1">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="nc">Spex</span><span class="o">.</span><span class="n">transition</span><span class="p" data-group-id="2444000348-2">(</span><span class="p" data-group-id="2444000348-3">{</span><span class="nc">Tree</span><span class="p">,</span><span class="w"> </span><span class="n">pine_id</span><span class="p" data-group-id="2444000348-3">}</span><span class="p">,</span><span class="w"> </span><span class="ss">:a</span><span class="p">,</span><span class="w"> </span><span class="ss">:sapling</span><span class="p" data-group-id="2444000348-2">)</span><span class="w">
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">pour_onto</span><span class="p" data-group-id="2444000348-4">(</span><span class="n">pine_id</span><span class="p">,</span><span class="w"> </span><span class="ss">:oil</span><span class="p" data-group-id="2444000348-4">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="nc">Spex</span><span class="o">.</span><span class="n">transition</span><span class="p" data-group-id="2444000348-5">(</span><span class="p" data-group-id="2444000348-6">{</span><span class="nc">Tree</span><span class="p">,</span><span class="w"> </span><span class="n">pine_id</span><span class="p" data-group-id="2444000348-6">}</span><span class="p">,</span><span class="w"> </span><span class="ss">:a</span><span class="p">,</span><span class="w"> </span><span class="ss">:withered</span><span class="p" data-group-id="2444000348-5">)</span><span class="w">
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">observe_growth</span><span class="p" data-group-id="2444000348-7">(</span><span class="n">pine_id</span><span class="p" data-group-id="2444000348-7">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="nc">Spex</span><span class="o">.</span><span class="n">transition</span><span class="p" data-group-id="2444000348-8">(</span><span class="p" data-group-id="2444000348-9">{</span><span class="nc">Tree</span><span class="p">,</span><span class="w"> </span><span class="n">pine_id</span><span class="p" data-group-id="2444000348-9">}</span><span class="p">,</span><span class="w"> </span><span class="ss">:__internal__</span><span class="p">,</span><span class="w"> </span><span class="ss">:mature_tree</span><span class="p" data-group-id="2444000348-8">)</span><span class="w">
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">cut_down</span><span class="p" data-group-id="2444000348-10">(</span><span class="n">pine_id</span><span class="p" data-group-id="2444000348-10">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="nc">Spex</span><span class="o">.</span><span class="n">transition</span><span class="p" data-group-id="2444000348-11">(</span><span class="p" data-group-id="2444000348-12">{</span><span class="nc">Tree</span><span class="p">,</span><span class="w"> </span><span class="n">pine_id</span><span class="p" data-group-id="2444000348-12">}</span><span class="p">,</span><span class="w"> </span><span class="ss">:b</span><span class="p">,</span><span class="w"> </span><span class="ss">:lumber</span><span class="p" data-group-id="2444000348-11">)</span><span class="w">
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">burn</span><span class="p" data-group-id="2444000348-13">(</span><span class="n">pine_id</span><span class="p" data-group-id="2444000348-13">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="nc">Spex</span><span class="o">.</span><span class="n">transition</span><span class="p" data-group-id="2444000348-14">(</span><span class="p" data-group-id="2444000348-15">{</span><span class="nc">Tree</span><span class="p">,</span><span class="w"> </span><span class="n">pine_id</span><span class="p" data-group-id="2444000348-15">}</span><span class="p">,</span><span class="w"> </span><span class="ss">:c</span><span class="p">,</span><span class="w"> </span><span class="ss">:ash</span><span class="p" data-group-id="2444000348-14">)</span></code></pre><p>As mentioned above, the states do not have to match the specification states. The actions,
+however, do need to match, as these are what the behavioural equivalence is judged on.</p><p>An exception to this and a useful addition is the <code class="inline">__internal__</code> action, which can be used to
+record internal state transitions that are not part of the specification but that you still want
+to be recorded in the implementation model. These are ignored (or rather: treated specially) for
+the behavioural equivalence checks.</p><p>Both <a href="#init_instance/4"><code class="inline">Spex.init_instance/4</code></a> and <a href="#transition/3"><code class="inline">Spex.transition/3</code></a> will return <code class="inline">:ok</code> on success or
+<code class="inline">{:error, error}</code> on failure; this error will be one of the errors from <a href="Spex.Errors.html"><code class="inline">Spex.Errors</code></a> by default.
+If you configured a custom error handler in your specifications (see <a href="Spex.Specification.html"><code class="inline">Spex.Specification</code></a>), the
+functions will return whatever your error handler returned for the given error.</p><p>There are also, <a href="#init_instance!/4"><code class="inline">Spex.init_instance!/4</code></a> and <a href="#transition!/3"><code class="inline">Spex.transition!/3</code></a>, which raise when their non-bang
+counterparts would return an error. Since these errors point to bugs in your implementation, using
+these bang variants might be reasonable.</p><p>On the other end, there are <a href="#init_instance_async/4"><code class="inline">Spex.init_instance_async/4</code></a> and <a href="#transition_async/3"><code class="inline">Spex.transition_async/3</code></a>, which
+asynchronously cast to the underlying GenServer and always return <code class="inline">:ok</code>. Error handling is then
+entirely up to your specifications' error handlers and impact on the running system is minimised.</p><h3 id="module-derive-implementation-models-in-tests" class="section-heading"><a href="#module-derive-implementation-models-in-tests" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Derive implementation models: in tests</span></h3><p>Your tests should cover all possible transitions of your implementation, so we can use them to
+derive an implementation model. To do this, add the following to your <code class="inline">test_helper.exs</code>:</p><pre><code class="makeup elixir" translate="no"><span class="nc">Spex.Testing</span><span class="o">.</span><span class="n">prepare_for_test_suite</span><span class="p" data-group-id="6331019878-1">(</span><span class="p" data-group-id="6331019878-1">)</span></code></pre><p>This prepares the Spex engine to record all transitions from tests and write derived
+implementation models in the directory configured above.</p><p>In unit tests, we often construct our parameters to be in a certain state. When using
+<a href="#init_instance/4"><code class="inline">Spex.init_instance/4</code></a>, though, the given initial state is added as an initial state of the
+implementation model, which we don't want in these cases. To construct an instance in a certain
+state without affecting the implementation model, there is <a href="Spex.Testing.html#mock_instance!/4"><code class="inline">Spex.Testing.mock_instance!/4</code></a>. In a
+test for our pine forest above, you might do something like this:</p><pre><code class="makeup elixir" translate="no"><span class="kn">alias</span><span class="w"> </span><span class="nc">YourApp.Specifications.Tree</span><span class="w">
+
+</span><span class="nc">Spex.Testing</span><span class="o">.</span><span class="n">mock_instance!</span><span class="p" data-group-id="0780973617-1">(</span><span class="nc">Tree</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0780973617-2">{</span><span class="nc">Tree</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="0780973617-2">}</span><span class="p">,</span><span class="w"> </span><span class="ss">:mature_tree</span><span class="p" data-group-id="0780973617-1">)</span><span class="w">
+
+</span><span class="n">assert</span><span class="w"> </span><span class="nc">YourApp.Pine</span><span class="o">.</span><span class="n">cut_down</span><span class="p" data-group-id="0780973617-3">(</span><span class="mi">1</span><span class="p" data-group-id="0780973617-3">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">:ok</span></code></pre><p>Since <code class="inline">cut_down/1</code> calls <code class="inline">Spex.transition({Tree, pine_id}, :b, :lumber)</code>, this test would add a
+transition from state <code class="inline">:mature_tree</code> with action <code class="inline">:b</code> to state <code class="inline">:lumber</code> to the implementation
+model.</p><h3 id="module-derive-implementation-models-live" class="section-heading"><a href="#module-derive-implementation-models-live" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Derive implementation models: live</span></h3><p>When running in non-test environments, Spex expects all implementation models to exist already. If
+you'd rather derive your implementation models live, you can either (1) ignore
+implementation-model-not-found errors or (2) create empty implementation models in learning mode.</p><p>For (1), adjust/add an error handler in your specifications, e.g. as so:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">YourApp.Specifications.Tree</span><span class="w"> </span><span class="k" data-group-id="1086624868-1">do</span><span class="w">
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Spex.Specification</span><span class="w">
+
+  </span><span class="c1">#...</span><span class="w">
+
+  </span><span class="na">@impl</span><span class="w"> </span><span class="nc">Spex.Specification</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">error_handler</span><span class="p" data-group-id="1086624868-2">(</span><span class="p" data-group-id="1086624868-3">%</span><span class="nc" data-group-id="1086624868-3">Spex.Errors.ImplModelError</span><span class="p" data-group-id="1086624868-3">{</span><span class="ss">reason</span><span class="p">:</span><span class="w"> </span><span class="ss">:impl_model_not_found</span><span class="p" data-group-id="1086624868-3">}</span><span class="p">,</span><span class="w"> </span><span class="c">_caller</span><span class="p" data-group-id="1086624868-2">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="ss">:ok</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">error_handler</span><span class="p" data-group-id="1086624868-4">(</span><span class="n">error</span><span class="p">,</span><span class="w"> </span><span class="n">caller</span><span class="p" data-group-id="1086624868-4">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="k">super</span><span class="p" data-group-id="1086624868-5">(</span><span class="n">error</span><span class="p">,</span><span class="w"> </span><span class="n">caller</span><span class="p" data-group-id="1086624868-5">)</span><span class="w">
+</span><span class="k" data-group-id="1086624868-1">end</span></code></pre><p>For (2), for each specification, create a file
+<code class="inline">&quot;Elixir.YourApp.Specifications.[YOUR_SPECIFICATION].spex</code> in your configured implementation model
+directory (<code class="inline">:impl_models_dir</code>) with this content:</p><pre><code class="text">Specification: Elixir.YourApp.Specifications.[YOUR_SPECIFICATION]
+Learning mode: true
+Transitions:</code></pre><p>For both options, when you think that all transitions have been recorded, via a remote shell, call
+<code class="inline">Spex.export_impl_models()</code>. This will return a list of tuples <code class="inline">{filename, serialisation}</code>, which
+you can then store in your implementation model directory (with the given filename and the
+serialisation as content).</p><h3 id="module-check-behavioural-equivalence-offline" class="section-heading"><a href="#module-check-behavioural-equivalence-offline" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Check behavioural equivalence: offline</span></h3><p>After implementation models have been derived and stored, you can run <a href="Mix.Tasks.Spex.html"><code class="inline">mix spex</code></a> (see
+<a href="Mix.Tasks.Spex.html"><code class="inline">Mix.Tasks.Spex</code></a>) to check whether they are behaviourally equivalent. Currently, the output only
+tells you <em>if</em> an implementation model is not behaviourally equivalent to its specification and
+you are required to analyse the model to understand why.</p><h3 id="module-check-behavioural-equivalence-online" class="section-heading"><a href="#module-check-behavioural-equivalence-online" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Check behavioural equivalence: online</span></h3><p>Once you have derived implementation models that were deemed behaviourally equivalent to their
+specification, you are ready to use Spex in production. Every time you initialise and instance or
+record a transition, it is checked whether the initialisation or transition is part of the
+implementation model. If it is, all is well. If it isn't, a behavioural equivalence check on the
+resultant model against the specification is run. In any case, an <code class="inline">%Spex.Errors.InstanceError{}</code>
+is reported, either with <code class="inline">:reason</code> being <code class="inline">:deviation_still_equivalent</code> or
+<code class="inline">:deviation_not_equivalent</code>. It is up to your specification's error handler to handle these cases
+accordingly (e.g. log the occurrence but still return <code class="inline">:ok</code> in the former case). The reason is
+that even deviations that don't break the equivalence hint at scenarios your tests don't cover.
+You can then fix these reports in the future by adding a test that covers the transition or by
+adding the transition manually to your implementation model.</p><h3 id="module-manual-instance-management" class="section-heading"><a href="#module-manual-instance-management" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Manual instance management</span></h3><p>To inspect or delete the instances managed by an instance manager, each instance manager offers
+more functionality than that exposed through <a href="Spex.html"><code class="inline">Spex</code></a>. See
+<a href="Spex.InstanceManager.SimpleInstanceManager.html"><code class="inline">Spex.InstanceManager.SimpleInstanceManager</code></a> and <a href="Spex.InstanceManager.DistributedInstanceManager.html"><code class="inline">Spex.InstanceManager.DistributedInstanceManager</code></a>
+for details.</p>
     </section>
 
 </div>
@@ -296,7 +419,7 @@ bisimilarity checks with the <a href="Mix.Tasks.Spex.html"><code class="inline">
       <h1 class="signature" translate="no">action()</h1>
 
 
-        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex.ex#L126" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex.ex#L297" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -324,7 +447,7 @@ bisimilarity checks with the <a href="Mix.Tasks.Spex.html"><code class="inline">
       <h1 class="signature" translate="no">state()</h1>
 
 
-        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex.ex#L116" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex.ex#L287" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -352,7 +475,7 @@ bisimilarity checks with the <a href="Mix.Tasks.Spex.html"><code class="inline">
       <h1 class="signature" translate="no">transition()</h1>
 
 
-        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex.ex#L131" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex.ex#L302" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -393,7 +516,7 @@ bisimilarity checks with the <a href="Mix.Tasks.Spex.html"><code class="inline">
       <h1 class="signature" translate="no">child_spec(opts)</h1>
 
 
-        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex.ex#L140" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex.ex#L311" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -421,7 +544,7 @@ bisimilarity checks with the <a href="Mix.Tasks.Spex.html"><code class="inline">
       <h1 class="signature" translate="no">export_impl_models()</h1>
 
 
-        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex.ex#L166" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex.ex#L338" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -447,7 +570,7 @@ bisimilarity checks with the <a href="Mix.Tasks.Spex.html"><code class="inline">
       <h1 class="signature" translate="no">init_instance(spec, instance_identifier, meta \\ nil, initial_state \\ nil)</h1>
 
 
-        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex.ex#L144" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex.ex#L316" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -473,7 +596,7 @@ bisimilarity checks with the <a href="Mix.Tasks.Spex.html"><code class="inline">
       <h1 class="signature" translate="no">init_instance!(spec, instance_identifier, meta \\ nil, initial_state \\ nil)</h1>
 
 
-        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex.ex#L147" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex.ex#L319" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -499,7 +622,7 @@ bisimilarity checks with the <a href="Mix.Tasks.Spex.html"><code class="inline">
       <h1 class="signature" translate="no">init_instance_async(spec, instance_identifier, meta \\ nil, initial_state \\ nil)</h1>
 
 
-        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex.ex#L151" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex.ex#L323" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -521,7 +644,7 @@ bisimilarity checks with the <a href="Mix.Tasks.Spex.html"><code class="inline">
       <h1 class="signature" translate="no">transition(instance_identifier, action, state)</h1>
 
 
-        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex.ex#L155" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex.ex#L327" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -543,7 +666,7 @@ bisimilarity checks with the <a href="Mix.Tasks.Spex.html"><code class="inline">
       <h1 class="signature" translate="no">transition!(instance_identifier, action, state)</h1>
 
 
-        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex.ex#L158" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex.ex#L330" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -565,7 +688,7 @@ bisimilarity checks with the <a href="Mix.Tasks.Spex.html"><code class="inline">
       <h1 class="signature" translate="no">transition_async(instance_identifier, action, state)</h1>
 
 
-        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex.ex#L162" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex.ex#L334" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -586,9 +709,9 @@ bisimilarity checks with the <a href="Mix.Tasks.Spex.html"><code class="inline">
         <p>
 
             <span class="line">
-              <a href="https://hex.pm/packages/lts_spex/0.1.0">Hex Package</a>
+              <a href="https://hex.pm/packages/lts_spex/0.1.1">Hex Package</a>
 
-              <a href="https://preview.hex.pm/preview/lts_spex/0.1.0">Hex Preview</a>
+              <a href="https://preview.hex.pm/preview/lts_spex/0.1.1">Hex Preview</a>
 
             </span>
 

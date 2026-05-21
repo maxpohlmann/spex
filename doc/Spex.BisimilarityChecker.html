@@ -5,14 +5,14 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.40.2">
-    <meta name="project" content="spex v0.1.0">
+    <meta name="project" content="spex v0.1.1">
 
 
-    <title>Spex.BisimilarityChecker — spex v0.1.0</title>
+    <title>Spex.BisimilarityChecker — spex v0.1.1</title>
 
     <link rel="stylesheet" href="dist/html-elixir-NHQLCD6Y.css" />
 
-    <script defer src="dist/sidebar_items-4FF66F09.js"></script>
+    <script defer src="dist/sidebar_items-C4A89118.js"></script>
     <script defer src="docs_config.js"></script>
     <script defer src="dist/html-Y2MUTVIN.js"></script>
 
@@ -37,7 +37,7 @@
 spex
         </a>
         <div class="sidebar-projectVersion" translate="no">
-          v0.1.0
+          v0.1.1
         </div>
       </div>
     </div>
@@ -94,7 +94,7 @@ spex
   <div class="heading-with-actions top-heading">
     <h1>
       <span translate="no">Spex.<wbr />BisimilarityChecker</span> 
-      <small class="app-vsn" translate="no">(spex v0.1.0)</small>
+      <small class="app-vsn" translate="no">(spex v0.1.1)</small>
 
     </h1>
 
@@ -137,7 +137,7 @@ spex
 
       </div>
 
-        <div class="summary-synopsis"><p>Compares an ImplModel against a Specification using bisimilarity checking.</p></div>
+        <div class="summary-synopsis"><p>Compares an ImplModel against its Specification using bisimilarity checking.</p></div>
 
     </div>
 
@@ -165,7 +165,7 @@ spex
       <h1 class="signature" translate="no">bisimilar_to_specification?(impl_model)</h1>
 
 
-        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex/bisimilarity_checker.ex#L41" class="icon-action" rel="help nofollow" aria-label="View Source">
+        <a href="https://github.com/maxpohlmann/spex/blob/main/lib/spex/bisimilarity_checker.ex#L29" class="icon-action" rel="help nofollow" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -180,10 +180,7 @@ spex
 
       </div>
 
-<p>Compares an ImplModel against a Specification using bisimilarity checking.</p><p>Returns <code class="inline">true</code> if the implementation model is bisimilar to the specification,
-<code class="inline">false</code> otherwise.</p><h2 id="bisimilar_to_specification?/1-parameters" class="section-heading"><a href="#bisimilar_to_specification?/1-parameters" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Parameters</span></h2><ul><li><code class="inline">impl_model</code>: A <code class="inline">%Spex.ImplModel{}</code> struct containing observed transitions</li><li><code class="inline">specification</code>: A module implementing the <a href="Spex.Specification.html"><code class="inline">Spex.Specification</code></a> behaviour</li></ul><h2 id="bisimilar_to_specification?/1-examples" class="section-heading"><a href="#bisimilar_to_specification?/1-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Examples</span></h2><pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">impl_model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="9803809476-1">%</span><span class="nc" data-group-id="9803809476-1">Spex.ImplModel</span><span class="p" data-group-id="9803809476-1">{</span><span class="n">...</span><span class="p" data-group-id="9803809476-1">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Spex.BisimilarityChecker</span><span class="o">.</span><span class="n">bisimilar_to_specification?</span><span class="p" data-group-id="9803809476-2">(</span><span class="n">impl_model</span><span class="p">,</span><span class="w"> </span><span class="nc">MySpecification</span><span class="p" data-group-id="9803809476-2">)</span><span class="w">
-</span><span class="no">true</span></code></pre>
+<p>Compares an ImplModel against its Specification using bisimilarity checking.</p><p>Returns <code class="inline">true</code> if the implementation model is bisimilar to the specification, <code class="inline">false</code> otherwise.</p>
   </section>
 </section>
 
@@ -195,9 +192,9 @@ spex
         <p>
 
             <span class="line">
-              <a href="https://hex.pm/packages/lts_spex/0.1.0">Hex Package</a>
+              <a href="https://hex.pm/packages/lts_spex/0.1.1">Hex Package</a>
 
-              <a href="https://preview.hex.pm/preview/lts_spex/0.1.0">Hex Preview</a>
+              <a href="https://preview.hex.pm/preview/lts_spex/0.1.1">Hex Preview</a>
 
             </span>
 

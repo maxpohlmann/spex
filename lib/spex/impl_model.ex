@@ -29,8 +29,8 @@ defmodule Spex.ImplModel do
 
   @type observation_status ::
           :ok
-          | :deviation_still_bisimilar
-          | :deviation_not_bisimilar
+          | :deviation_still_equivalent
+          | :deviation_not_equivalent
 
   @doc """
   Observes a transition and returns its status and resulting model.
@@ -60,17 +60,18 @@ defmodule Spex.ImplModel do
 
         %{impl_model | transitions: MapSet.put(transitions, transition)}
         |> BisimilarityChecker.bisimilar_to_specification?() ->
-          :deviation_still_bisimilar
+          :deviation_still_equivalent
 
         true ->
-          :deviation_not_bisimilar
+          :deviation_not_equivalent
       end
 
     {observation_status, impl_model}
   end
 
   @doc """
-  Serialises an implementation model into `.spex` text format.
+  Serialises an implementation model into `.spex` text format. For info on the format, just see the
+  implementation of this function.
   """
   @spec serialise(t()) :: serialisation()
   def serialise(impl_model) do

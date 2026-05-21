@@ -1,5 +1,5 @@
 # `Spex.InstanceManager.DistributedInstanceManager.DistributionFactorState`
-[🔗](https://github.com/maxpohlmann/spex/blob/main/lib/spex/instance_manager/distributed_instance_manager.ex#L97)
+[🔗](https://github.com/maxpohlmann/spex/blob/main/lib/spex/instance_manager/distributed_instance_manager.ex#L42)
 
 Agent storing the configured distribution factor.
 

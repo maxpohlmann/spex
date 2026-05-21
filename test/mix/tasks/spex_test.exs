@@ -3,15 +3,16 @@ defmodule Mix.Tasks.SpexTest do
 
   import ExUnit.CaptureIO
 
-  test "run/1 exits with success when all impl models are bisimilar" do
+  test "run/1 returns :ok when all impl models are bisimilar" do
     output =
       capture_io(fn ->
-        assert catch_exit(Mix.Tasks.Spex.run([])) == {:shutdown, 0}
+        assert Mix.Tasks.Spex.run([]) == :ok
       end)
 
     plain_output = strip_ansi(output)
 
-    assert plain_output =~ "[Spex] All 2 ImplModels are bisimilar to their specifications."
+    assert plain_output =~
+             "[Spex] All 2 ImplModels are behaviourally equivalent to their " <> "specifications."
   end
 
   test "run/1 exits with failure and reports non-bisimilar models" do
@@ -24,9 +25,11 @@ defmodule Mix.Tasks.SpexTest do
     plain_output = strip_ansi(output)
 
     assert plain_output =~
-             "[Spex] 2 out of 4 ImplModels are not bisimilar to their specifications."
+             "[Spex] 2 out of 4 ImplModels are not behaviourally equivalent to their " <>
+               "specifications."
 
-    assert plain_output =~ "[Spex] ImplModel is not bisimilar after tests finished:"
+    assert plain_output =~
+             "[Spex] ImplModel is not behaviourally equivalent after tests finished:"
   end
 
   @spec strip_ansi(String.t()) :: String.t()

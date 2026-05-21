@@ -1,6 +1,6 @@
 defmodule Mix.Tasks.Spex do
   @moduledoc """
-  Mix task that checks saved implementation models for bisimilarity.
+  Mix task that checks saved implementation models for behavioural equivalence.
 
   This is the offline verification entry point for `.spex` model files.
   """
@@ -10,10 +10,15 @@ defmodule Mix.Tasks.Spex do
   @requirements ["app.config"]
 
   @doc """
-  Runs Spex bisimilarity checks for all loaded implementation models.
+  Runs Spex behavioural equivalence checks for all loaded implementation models.
 
-  Accepts either no arguments (uses configured `:impl_models_dir`) or one path
-  argument to a directory or file containing `.spex` models.
+  Accepts either no arguments (uses configured `:impl_models_dir`) or one path argument to a
+  directory or file containing `.spex` models.
+
+  If an implementation model is found to be not behaviourally equivalent to its specification, a
+  warning is logged and the task exits with status code 1. Currently, it is not possible to give
+  information about _why_ they are not equivalent. It is up to the developer to analyse the
+  implementation model and compare it to its specification.
   """
   @impl Mix.Task
   def run(args)
@@ -53,7 +58,8 @@ defmodule Mix.Tasks.Spex do
     if n_not_bisimilar == 0 do
       IO.puts(
         IO.ANSI.green() <>
-          "[Spex] All #{n_total} ImplModels are bisimilar to their specifications." <>
+          "[Spex] All #{n_total} ImplModels are behaviourally equivalent to their " <>
+          "specifications." <>
           IO.ANSI.default_color()
       )
 
@@ -62,7 +68,8 @@ defmodule Mix.Tasks.Spex do
       IO.puts(
         IO.ANSI.red() <>
           "[Spex] #{n_not_bisimilar} out of #{n_total} ImplModels are " <>
-          "#{IO.ANSI.italic()}not#{IO.ANSI.not_italic()} bisimilar to their specifications." <>
+          "#{IO.ANSI.italic()}not#{IO.ANSI.not_italic()} behaviourally equivalent to their " <>
+          "specifications." <>
           IO.ANSI.default_color()
       )
 
@@ -77,7 +84,7 @@ defmodule Mix.Tasks.Spex do
     if bisimilarity_status == false do
       IO.puts(
         IO.ANSI.red() <>
-          "[Spex] ImplModel is not bisimilar after tests finished:\n" <>
+          "[Spex] ImplModel is not behaviourally equivalent after tests finished:\n" <>
           Spex.ImplModel.serialise(impl_model) <>
           "\n" <>
           IO.ANSI.default_color()

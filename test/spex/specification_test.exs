@@ -41,7 +41,7 @@ defmodule Spex.SpecificationTest do
     end
 
     test "default error handler writes log and returns error" do
-      error = %Spex.Errors.TransitionError{reason: :deviation_not_bisimilar}
+      error = %Spex.Errors.TransitionError{reason: :deviation_not_equivalent}
 
       log =
         capture_log(fn ->
@@ -50,7 +50,7 @@ defmodule Spex.SpecificationTest do
 
       assert log =~ "[Spex] Error"
       assert log =~ "TransitionError"
-      assert log =~ "deviation_not_bisimilar"
+      assert log =~ "deviation_not_equivalent"
     end
   end
 
@@ -77,7 +77,7 @@ defmodule Spex.SpecificationTest do
     end
 
     test "error handler does not write log and returns :ok" do
-      error = %Spex.Errors.TransitionError{reason: :deviation_not_bisimilar}
+      error = %Spex.Errors.TransitionError{reason: :deviation_not_equivalent}
 
       log =
         capture_log(fn ->

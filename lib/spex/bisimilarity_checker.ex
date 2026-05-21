@@ -21,21 +21,9 @@ defmodule Spex.BisimilarityChecker do
   end
 
   @doc """
-  Compares an ImplModel against a Specification using bisimilarity checking.
+  Compares an ImplModel against its Specification using bisimilarity checking.
 
-  Returns `true` if the implementation model is bisimilar to the specification,
-  `false` otherwise.
-
-  ## Parameters
-
-  - `impl_model`: A `%Spex.ImplModel{}` struct containing observed transitions
-  - `specification`: A module implementing the `Spex.Specification` behaviour
-
-  ## Examples
-
-      iex> impl_model = %Spex.ImplModel{...}
-      iex> Spex.BisimilarityChecker.bisimilar_to_specification?(impl_model, MySpecification)
-      true
+  Returns `true` if the implementation model is bisimilar to the specification, `false` otherwise.
   """
   @spec bisimilar_to_specification?(Spex.ImplModel.t()) :: boolean()
   def bisimilar_to_specification?(%Spex.ImplModel{specification: specification} = impl_model) do

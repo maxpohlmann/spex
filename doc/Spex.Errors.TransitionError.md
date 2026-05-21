@@ -7,7 +7,7 @@ Transition-level error used for deviations and timeout conditions.
 
 ```elixir
 @type reason() ::
-  :transition_timeout | :deviation_not_bisimilar | :deviation_still_bisimilar
+  :transition_timeout | :deviation_not_equivalent | :deviation_still_equivalent
 ```
 
 # `t`

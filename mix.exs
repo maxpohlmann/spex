@@ -8,7 +8,7 @@ defmodule Spex.MixProject do
 
     [
       app: :spex,
-      version: "0.1.0",
+      version: "0.1.1",
       elixirc_paths: elixirc_paths(Mix.env()),
       test_paths: test_paths(meta_tests?),
       config_path: config_path(meta_tests?),
@@ -59,7 +59,7 @@ defmodule Spex.MixProject do
 
   defp description do
     "A tool to check the correctness of implementations against specifications. It provides " <>
-      "ways to (1) specify specifications, (2) derive implementation models, and (3) check " <>
+      "ways to (1) define specifications, (2) derive implementation models, and (3) check " <>
       "these against each other w.r.t. behavioural equivalence."
   end
 

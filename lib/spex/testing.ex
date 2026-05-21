@@ -12,6 +12,17 @@ defmodule Spex.Testing do
 
   @doc """
   Prepares after-suite hooks that export collected implementation models.
+
+  Call this in your `test_helper.exs`.
+
+  It accepts the following opts:
+
+  - `:instance_manager`: An instance manager module. By default, it uses the configured default
+    instance manager (see `m:Spex#module-using-other-instance-managers`). Specify this if you are
+    starting your instance manager in your supervision tree directly.
+  - `:impl_models_dir`: Path to the directory where collected implementation models are exported
+    after tests. By default, this is the configured implementation models directory (see
+    `m:Spex#module-configuration`).
   """
   @spec prepare_for_test_suite([opt()]) :: :ok
   def prepare_for_test_suite(opts \\ []) do
@@ -35,6 +46,8 @@ defmodule Spex.Testing do
 
   @doc """
   Inserts or updates a mock instance at a specific state for test setup.
+
+  Use this in unit tests to setup an instance without affecting the impl_model.
   """
   defdelegate mock_instance!(spec, instance_identifier, state, meta \\ nil),
     to: @default_instance_manager
