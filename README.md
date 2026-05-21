@@ -1,5 +1,7 @@
 # Spex
 
+[![Elixir CI](https://github.com/maxpohlmann/spex/actions/workflows/elixir.yml/badge.svg)](https://github.com/maxpohlmann/spex/actions/workflows/elixir.yml)
+
 [\[Read this on hexdocs\]](https://hexdocs.pm/lts_spex)
 
 Spex is a tool to check the correctness of implementations against specifications. Concretely, it provides ways to (1) define specifications, (2) derive implementation models, and (3) check these against each other w.r.t. behavioural equivalence.
